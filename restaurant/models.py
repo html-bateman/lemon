@@ -12,6 +12,15 @@ class Booking(models.Model):
         return self.first_name + ' ' + self.last_name
 
 
+class CapstoneBooking(models.Model):
+    Name = models.CharField(max_length=200)
+    No_of_guests = models.SmallIntegerField()
+    BookingDate = models.DateTimeField()
+
+    def __str__(self) -> str:
+        return self.Name
+
+
 class Reservation(models.Model):
     first_name = models.CharField(max_length=200)
     reservation_date = models.DateField()
@@ -30,3 +39,12 @@ class Menu(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class CapstoneMenu(models.Model):
+    Title = models.CharField(max_length=200)
+    Price = models.DecimalField(max_digits=6, decimal_places=2)
+    Inventory = models.SmallIntegerField()
+
+    def __str__(self):
+        return self.Title
