@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+djangorestframework = "*"
+djangorestframework-csv = "*"
+djangorestframework-xml = "*"
+djangorestframework-yaml = "*"
+bleach = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"

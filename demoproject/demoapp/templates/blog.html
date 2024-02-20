@@ -1,0 +1,30 @@
+<html>
+<head>
+    <title>Comment section</title>
+</head>
+<body>
+    <div>
+        <h1>User Comments</h1>
+        <form method="post" id="form">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>
+<script>
+    const form = document.getElementById('form');
+    form.addEventListener("submit",submitHandler);
+    function submitHandler(e){
+        e.preventDefault();
+        fetch(form.action,{method:'POST',body:new FormData(form)})
+        .then(response=>response.json())
+        .then(data=>{
+            if(data.message==='success'){
+                alert('Success!');
+                form.reset()
+            }
+        })
+    }
+</script>
+</html>

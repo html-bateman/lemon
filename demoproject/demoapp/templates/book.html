@@ -1,0 +1,26 @@
+<html>
+<body>
+<h1>Make a reservation</h1>
+<form method="post" id="form">
+    {{form.as_p}}
+<input type="submit" id="button">
+</form>
+</body>
+<script>
+    console.log("Hello");
+    document.getElementById("id_reservation_date").type = "date"
+    const form = document.getElementById('form');
+    form.addEventListener("submit",submitHandler);
+    function submitHandler(e){
+        e.preventDefault();
+        fetch(form.action,{method:'POST',body:new FormData(form)})
+        .then(response=>response.json())
+        .then(data=>{
+            if(data.message==='success'){
+                alert('Success!');
+                form.reset()
+            }
+        })
+    }
+</script>
+</html>
