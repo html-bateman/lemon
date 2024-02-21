@@ -4,9 +4,13 @@ from datetime import datetime
 from django.core import serializers
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework import generics, viewsets
+from rest_framework.permissions import IsAuthenticated
 from .forms import BookingForm, ReservationForm
 from .models import Menu, Reservation
+from .serializers import UserSerializer, MenuSerializer, ReservationSerializer
 
 
 # Create your views here.
@@ -78,3 +82,30 @@ def display_menu_item(request, pk=None):
     else:
         menu_item = ''
     return render(request, 'menu_item.html', {'menu_item': menu_item})
+
+
+class UserView(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class SingleUserView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class MenuView(generics.ListCreateAPIView):
+    queryset = Menu.objects.all()
+    serializer_class = MenuSerializer
+
+
+class SingleMenuView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Menu.objects.all()
+    serializer_class = MenuSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class ReservationViewSet(viewsets.ModelViewSet):
+    queryset = Reservation.objects.all()
+    serializer_class = ReservationSerializer
