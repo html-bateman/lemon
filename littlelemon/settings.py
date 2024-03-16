@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-r-%0eqcja86asp_+*1@3d6t9wm65$7^p*v^m961p@)w7*3ob0n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '192.168.22.156', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.22.156', 'localhost'
+                 '*', '216.246.21.185'
+                 ]
 
 
 # Application definition
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # The settings for app updated for the Graded assessment
     'restaurant',
+    'corsheaders',
     'rest_framework',
     'LittleLemonAPI',
     'rest_framework.authtoken',
@@ -53,8 +56,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
-
+CORS_ALLOW_ALL_ORIGINS = True
 ROOT_URLCONF = 'littlelemon.urls'
 
 TEMPLATES = [
